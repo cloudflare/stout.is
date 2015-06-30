@@ -1,0 +1,6 @@
+default:
+  files: '*'
+  root: 'build'
+
+production:
+  bucket: 'stout.is'
