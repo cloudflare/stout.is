@@ -1,230 +1,262 @@
 doctype html
+include ../bower_components/ui/jade/typekit
+include ../bower_components/ui/jade/logo
+
+//
+  -
+  |
+  |    ______          _____ ______ _____
+  |   |  ____|   /\   / ____|  ____|  __ \
+  |   | |__     /  \ | |  __| |__  | |__) |
+  |   |  __|   / /\ \| | |_ |  __| |  _  /
+  |   | |____ / ____ \ |__| | |____| | \ \
+  |   |______/_/    \_\_____|______|_|  \_\
+  |
+  |
+
 html
   head
-    link(rel="stylesheet" href="css/index.css")
+    meta(charset="utf-8")
+    meta(name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, minimal-ui")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge, chrome=1")
+
+    title Stout - stout.is - by Eager - eager.io
+
+    meta(name="description" content="Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.")
+
+    meta(property="og:title" content="Stout static deployment, by Eager")
+    meta(property="og:description" content="Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.")
+    meta(name="twitter:title" content="Stout static deployment, by Eager")
+    meta(name="twitter:description" content="Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.")
+
+    link(href="images/favicon.ico" rel="icon" type="image/x-icon")
+
+    +typekit
+
+    link(href="css/index.css" rel="stylesheet" )
 
   body
-    :markdown
-      # Stout
+    .hero-stripe
+      .hero
+        .stout-logo-container
+          .stout-logo
+            .stout-logo-stage
+              .stout-logo-resizer
+                .stout-logo-beer
+                  .stout-body-bottom
+                  .stout-body-bottom-cover
+                  .stout-body-bottom-cover-foam
+                  .stout-body
+                  .stout-body-cover-foam
+                  .stout-body-cover-top
+                  .stout-body-cover-bottom
+                  .head-foam-bottom
+                  .head-foam
+                  .head-foam-top
+                  .head-foam-top-cover
 
-      Stout is a deploy tool for static websites.  It takes a website and uploads it to S3 in a more reliable way than other tools.  It can be an alternative
-      to paid services like Divshot, to dynamic web servers like Rails, or to manually uploading your site to S3 or an FTP server.
+        h1 Stout
+        h2 Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.
 
-      ## Why You Need Stout
+    div.content.
+      <h2>Why You Need Stout</h2>
 
-      Traditionally uploading your files to S3 introduces a serious caching issue we ran into in practice at [Eager](https://eager.io).
+      <p>Traditionally uploading your files to S3 introduces a serious caching issue we ran into in practice at <a href="https://eager.io">Eager</a>.
       The cache for the various files your site depends on can expire at different times, meaning your users get an inconsistent (broken) set of files for a
-      time after every single deploy.  Further, traditional static site deployments don't offer any method of rolling back a previous deploy.
+      time after every single deploy. Further, traditional static site deployments don&#39;t offer any method of rolling back a previous deploy.</p>
 
-      We built Stout to fix these issues.
+      <p>We built Stout to fix these issues.</p>
 
-      ### Features
+      <h3>Features</h3>
 
-      - Versions script and style files to ensure your pages don't use an inconsistent set of files during or after a deploy
-      - Supports rollback to any previous version
-      - Does not depend on any specific build tool or workflow (it is a standalone executable written in Go)
-      - Does not require a datastore of any kind to maintain state or history
-      - Can be used by multiple developers simultaneously without locking or a danger of inconsistent state
-      - Properly handles caching headers
-      - Supports deploying multiple projects to various subdirectories of the same site without conflicts
-      - Compresses files for faster delivery
+      <ul><li>Versions script and style files to ensure your pages don&#39;t use an inconsistent set of files during or after a deploy</li><li>Supports rollback to any previous version</li><li>Does not depend on any specific build tool or workflow (it is a standalone executable written in Go)</li><li>Does not require a datastore of any kind to maintain state or history</li><li>Can be used by multiple developers simultaneously without locking or a danger of inconsistent state</li><li>Properly handles caching headers</li><li>Supports deploying multiple projects to various subdirectories of the same site without conflicts</li><li>Compresses files for faster delivery</li></ul>
 
-      ### Limitations
+      <h3>Limitations</h3>
 
-      - Stout doesn't currently support rolling back files that aren't HTML, JS or CSS (images, videos, etc.).  See the Versioning section for more information.
-      - All-or-nothing consistency is only guarenteed on a per-html-file basis, not for the entire deploy.  See the Consistency section for more information.
+      <ul><li>Stout doesn&#39;t currently support rolling back files that aren&#39;t HTML, JS or CSS (images, videos, etc.). See the Versioning section for more information.</li><li>All-or-nothing consistency is only guarenteed on a per-html-file basis, not for the entire deploy. See the Consistency section for more information.</li></ul>
 
-      ## Getting Started
+      <h2>Getting Started</h2>
 
-      [Download](https://github.com/EagerIO/Stout/releases) the `stout` executable for your system from our latest release into a directory on your `$PATH`, like `/usr/local/bin`.
+      <p><a href="https://github.com/EagerIO/Stout/releases">Download</a> the <code>stout</code> executable for your system from our latest release into a directory on your <code>$PATH</code>, like <code>/usr/local/bin</code>.</p>
 
-      You can use the `create` command to create a new site.  It automatically creates an S3 bucket, a CloudFront distribution, and a user account for deployment.  It therefore requires
-      credentials for an Amazon AWS account which has permissions to those services along with Route 53.
+      <p>You can use the <code>create</code> command to create a new site. It automatically creates an S3 bucket, a CloudFront distribution, and a user account for deployment. It therefore requires
+      credentials for an Amazon AWS account which has permissions to those services along with Route 53.</p>
 
-      ```sh
-      stout create --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET
-      ```
+      <pre><code>stout create --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET</code></pre>
 
-      You can then deploy your project:
+      <p>You can then deploy your project:</p>
 
-      ```sh
-      stout deploy --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET
-      ```
+      <pre><code>stout deploy --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET</code></pre>
 
-      If your built files are in another directory, add the `--root` option:
+      <p>If your built files are in another directory, add the <code>--root</code> option:</p>
 
-      ```sh
-      stout deploy --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET --root ./build
-      ```
+      <pre><code>stout deploy --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET --root ./build</code></pre>
 
-      If you don't want to deploy all the files in your folder, use the files argument.
+      <p>If you don&#39;t want to deploy all the files in your folder, use the files argument.</p>
 
-      ```sh
-      stout deploy --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET --root ./build --files "*.html,images/*"
-      ```
+      <pre><code>stout deploy --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET --root ./build --files &quot;*.html,images/*&quot;</code></pre>
 
-      Javascript and CSS included in your HTML files will always be included automatically.
+      <p>Javascript and CSS included in your HTML files will always be included automatically.</p>
 
-      The deploy command will give you a deploy id you can use in the future to rollback if you have to:
+      <p>The deploy command will give you a deploy id you can use in the future to rollback if you have to:</p>
 
-      ```sh
-      stout rollback --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET a3b8ff290c33
-      ```
+      <pre><code>stout rollback --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET a3b8ff290c33</code></pre>
 
-      Eventually you'll probably want to move your config to a deploy.yaml file, rather than specifying it in the command every time.
+      <p>Eventually you&#39;ll probably want to move your config to a deploy.yaml file, rather than specifying it in the command every time.</p>
 
-      Using the info below you can learn about what the deploy/rollback tools actually do, deploying to subfolders, deploying from your build tool, and rolling back.
+      <p>Using the info below you can learn about what the deploy/rollback tools actually do, deploying to subfolders, deploying from your build tool, and rolling back.</p>
 
-      ## Backstory
+      <h2>Backstory</h2>
 
-      We wrote Stout because we couldn't find an open-source way to reliably and efficiently deploy our static sites (including our app and blog).  We used a traditional upload-to-s3 tool, but caching meant a user could get the new html and styles, but the old scripts, for example, causing sporatic and random errors.  It also didn't support reliably rolling back when necessary.  We built Stout to be the reliable, production-ready choice for static deploys.
+      <p>We wrote Stout because we couldn&#39;t find an open-source way to reliably and efficiently deploy our static sites (including our app and blog). We used a traditional upload-to-s3 tool, but caching meant a user could get the new html and styles, but the old scripts, for example, causing sporatic and random errors. It also didn&#39;t support reliably rolling back when necessary. We built Stout to be the reliable, production-ready choice for static deploys.</p>
 
-      ## Function
+      <h2>Function</h2>
 
-      Stout is an executable file built from Go code.  The `deploy` command deploys one or more html files and their dependencies to a specified location in S3.  The `rollback` command takes a deploy id and rolls the project back to that version.
+      <p>Stout is an executable file built from Go code. The <code>deploy</code> command deploys one or more html files and their dependencies to a specified location in S3. The <code>rollback</code> command takes a deploy id and rolls the project back to that version.</p>
 
-      ### Deploy
+      <h3>Deploy</h3>
 
-      The deploy process works by parsing the script and style tags out of one or more html files.  It then hashes those files, uploads them prefixed with their hashes, and updates the location of the original script and link tags with the hashed locations.
+      <p>The deploy process works by parsing the script and style tags out of one or more html files. It then hashes those files, uploads them prefixed with their hashes, and updates the location of the original script and link tags with the hashed locations.</p>
 
-      It generates a deploy id by hashing all of the files in the deploy, and uploads the html files to a location prefixed by the deploy id.
+      <p>It generates a deploy id by hashing all of the files in the deploy, and uploads the html files to a location prefixed by the deploy id.</p>
 
-      When the uploads are successful, the prefixed html files are atomically copied to their unprefixed paths, completing the deploy.
+      <p>When the uploads are successful, the prefixed html files are atomically copied to their unprefixed paths, completing the deploy.</p>
 
-      ### Rollback
+      <h3>Rollback</h3>
 
-      A rollback simply copies the html files prefixed with the specified deploy id to the unprefixed paths.
+      <p>A rollback simply copies the html files prefixed with the specified deploy id to the unprefixed paths.</p>
 
-      ### Deploy Configuration
+      <h3>Deploy Configuration</h3>
 
-      You can configure the deploy tool with any combination of command line flags or arguments provided in a configuration yaml file.
+      <p>You can configure the deploy tool with any combination of command line flags or arguments provided in a configuration yaml file.</p>
 
-      The options are:
+      <p>The options are:</p>
 
-      ##### `bucket`
-        The S3 bucket to deploy to.  In most configurations this bucket should be the origin for the CDN which actually serves your site.  It usually makes sense to make this the url you are going to host your site from (i.e. `"example.com"`)
+      <h5><code>bucket</code></h5>
 
-      ##### `config` ("./deploy.yaml")
-        The location of a yaml file to read any otherwise unspecified configuration from.
+      <p>  The S3 bucket to deploy to. In most configurations this bucket should be the origin for the CDN which actually serves your site. It usually makes sense to make this the url you are going to host your site from (i.e. <code>&quot;example.com&quot;</code>)</p>
 
-      ##### `dest` ("./")
-        The destination directory to write files to in the S3 bucket.   For example if you wanted your this project to end up hosted at `yoursite.com/blog`, you would specify `--dest blog`.
+      <h5><code>config</code> (&quot;./deploy.yaml&quot;)</h5>
 
-      ##### `root` ("./")
-      The local directory where the files to be uploaded lives.  It's common to make this your "./build" directory or the like.
+      <p>  The location of a yaml file to read any otherwise unspecified configuration from.</p>
 
-      ##### `files` ("*")
-        Comma-seperated glob patterns of the files to be deployed (within the `--root`).  HTML files will be parsed, and the CSS/JS they point to will be included (versioned) automatically.  If you also include those files in your glob pattern they will be uploaded twice, once with a versioning hash in the URL, again without.
+      <h5><code>dest</code> (&quot;./&quot;)</h5>
 
-        Be sure to include any additional files you would like deployed like images, videos, font files, etc.
+      <p>  The destination directory to write files to in the S3 bucket. For example if you wanted your this project to end up hosted at <code>yoursite.com/blog</code>, you would specify <code>--dest blog</code>.</p>
 
-        You can use relative paths which break out of the `root`.  If you prefix the path with `-/`, it will be interpreted as relative to the project directory, not the `root`.
+      <h5><code>root</code> (&quot;./&quot;)</h5>
 
-      ##### `env`
-        The config file can contain configurations for multiple environments (production, staging, etc.).  This specifies which is used.  See the "YAML Config" section for more information.
+      <p>The local directory where the files to be uploaded lives. It&#39;s common to make this your &quot;./build&quot; directory or the like.</p>
 
-      ##### `key`
-        The AWS key to use.  The create command will create an IAM user for each project with access only to the relevant bucket.  See the Permissions section for more information.
+      <h5><code>files</code> (&quot;*&quot;)</h5>
 
-      ##### `secret`
-        The AWS secret of the provided key.
+      <p>  Comma-seperated glob patterns of the files to be deployed (within the <code>--root</code>). HTML files will be parsed, and the CSS/JS they point to will be included (versioned) automatically. If you also include those files in your glob pattern they will be uploaded twice, once with a versioning hash in the URL, again without.</p>
 
-      ##### `region` ("us-east-1")
-        The AWS region the S3 bucket is located in.
+      <p>  Be sure to include any additional files you would like deployed like images, videos, font files, etc.</p>
 
-      ### YAML Config
+      <p>  You can use relative paths which break out of the <code>root</code>. If you prefix the path with <code>-/</code>, it will be interpreted as relative to the project directory, not the <code>root</code>.</p>
 
-      You can provide a yaml file which specifies configuration defaults for the project being deployed.  We include this file in each project which will be deployed.  This file can have multiple configurations for different environments, along with a default section.
+      <h5><code>env</code></h5>
 
-      For example, the `deploy.yaml` for one of our projects looks like:
+      <p>  The config file can contain configurations for multiple environments (production, staging, etc.). This specifies which is used. See the &quot;YAML Config&quot; section for more information.</p>
 
-      ```yaml
-      default:
-        root: 'build/'
+      <h5><code>key</code></h5>
+
+      <p>  The AWS key to use. The create command will create an IAM user for each project with access only to the relevant bucket. See the Permissions section for more information.</p>
+
+      <h5><code>secret</code></h5>
+
+      <p>  The AWS secret of the provided key.</p>
+
+      <h5><code>region</code> (&quot;us-east-1&quot;)</h5>
+
+      <p>  The AWS region the S3 bucket is located in.</p>
+
+      <h3>YAML Config</h3>
+
+      <p>You can provide a yaml file which specifies configuration defaults for the project being deployed. We include this file in each project which will be deployed. This file can have multiple configurations for different environments, along with a default section.</p>
+
+      <p>For example, the <code>deploy.yaml</code> for one of our projects looks like:</p>
+
+      <pre><code>default:
+        root: &#39;build/&#39;
 
       production:
-        key: 'XXX'
-        secret: 'XXX'
-        bucket: 'eager.io'
+        key: &#39;XXX&#39;
+        secret: &#39;XXX&#39;
+        bucket: &#39;eager.io&#39;
 
       dev:
-        key: 'XXX'
-        secret: 'XXX'
-        bucket: 'next.eager.io'
-      ```
+        key: &#39;XXX&#39;
+        secret: &#39;XXX&#39;
+        bucket: &#39;next.eager.io&#39;</code></pre>
 
-      Replacing the "XXX"s with our actual credentials.
+      <p>Replacing the &quot;XXX&quot;s with our actual credentials.</p>
 
-      To deploy to development we run (from the directory with the deploy.yaml file in it):
+      <p>To deploy to development we run (from the directory with the deploy.yaml file in it):</p>
 
-      ```bash
-      deploy --env development
-      ```
+      <pre><code>bash
+      deploy --env development</code></pre>
 
-      A rollback of development would be:
+      <p>A rollback of development would be:</p>
 
-      ```bash
-      rollback --env development $DEPLOY_ID
-      ```
+      <pre><code>bash
+      rollback --env development $DEPLOY_ID</code></pre>
 
-      Where the deploy id is taken from the output of the deploy you wish to rollback to.
+      <p>Where the deploy id is taken from the output of the deploy you wish to rollback to.</p>
 
-      Our public projects use a similar config, but they specify the Amazon credentials as environment vars from the build system, passed in as flags:
+      <p>Our public projects use a similar config, but they specify the Amazon credentials as environment vars from the build system, passed in as flags:</p>
 
-      ```bash
-      deploy --env development --key $AMAZON_KEY_DEV --secret $AMAZON_SECRET_DEV
-      ```
+      <pre><code>bash
+      deploy --env development --key $AMAZON_KEY_DEV --secret $AMAZON_SECRET_DEV</code></pre>
 
-      Never commit Amazon credentials to a file in a public repo.  Keep them on your local machine, or in your build system's configuration.
+      <p>Never commit Amazon credentials to a file in a public repo. Keep them on your local machine, or in your build system&#39;s configuration.</p>
 
-      ### Clean URLS
+      <h3>Clean URLS</h3>
 
-      It's not specific to Stout, but it's worth mentioning that we recommend you structure your built folder to use a folder with an index.html file for each page.
+      <p>It&#39;s not specific to Stout, but it&#39;s worth mentioning that we recommend you structure your built folder to use a folder with an index.html file for each page.</p>
 
-      For example, if you want a root and a page at `/blog`, you would have:
+      <p>For example, if you want a root and a page at <code>/blog</code>, you would have:</p>
 
-      ```
+      <p><code>
       index.html
       blog/
         index.html
-      ```
+      </code></pre>
 
-      That way, assuming S3 and CloudFront are configured properly, you'll be able to use the clean URLs `/` and `/blog/`.
+      <p>That way, assuming S3 and CloudFront are configured properly, you&#39;ll be able to use the clean URLs <code>/</code> and <code>/blog/</code>.</p>
 
-      ### Permissions
+      <h3>Permissions</h3>
 
-      The AWS user which is used for Stout should have the `GetObject`, `PutObject`, `DeleteObject`, and `ListBucket` permissions.  The `utils/create_site.sh` script will set this up for you if you use it to create your site.
+      <p>The AWS user which is used for Stout should have the <code>GetObject</code>, <code>PutObject</code>, <code>DeleteObject</code>, and <code>ListBucket</code> permissions. The <code>utils/create_site.sh</code> script will set this up for you if you use it to create your site.</p>
 
-      This is an example policy config which works:
+      <p>This is an example policy config which works:</p>
 
-      ```json
-      {
-        "Version": "2012-10-17",
-        "Statement": [
+      <pre><code>{
+        &quot;Version&quot;: &quot;2012-10-17&quot;,
+        &quot;Statement&quot;: [
           {
-            "Effect": "Allow",
-            "Action": [
-              "s3:DeleteObject",
-              "s3:ListBucket",
-              "s3:PutObject",
-              "s3:GetObject"
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+              &quot;s3:DeleteObject&quot;,
+              &quot;s3:ListBucket&quot;,
+              &quot;s3:PutObject&quot;,
+              &quot;s3:GetObject&quot;
             ],
-            "Resource": [
-              "arn:aws:s3:::BUCKET", "arn:aws:s3:::BUCKET/*"
+            &quot;Resource&quot;: [
+              &quot;arn:aws:s3:::BUCKET&quot;, &quot;arn:aws:s3:::BUCKET/*&quot;
             ]
           }
         ]
-      }
-      ```
+      }</code></pre>
 
-      Be sure to replace `BUCKET` with your bucket's actual name.
+      <p>Be sure to replace <code>BUCKET</code> with your bucket&#39;s actual name.</p>
 
-      ### Deploying with CircleCI
+      <h3>Deploying with CircleCI</h3>
 
-      Deploying with CircleCI is simply a matter of installing the deploy tool and running it as you would locally.  Here's an excerpt of a working circle.yml:
+      <p>Deploying with CircleCI is simply a matter of installing the deploy tool and running it as you would locally. Here&#39;s an excerpt of a working circle.yml:</p>
 
-      ```yaml
-      dependencies:
+      <pre><code>dependencies:
         post:
           - go get github.com/tools/godep
           - git clone git@github.com:EagerIO/Stout.git
@@ -239,60 +271,54 @@ html
         production:
           branch: master
           commands:
-            - ./stout deploy --env production --key $AMAZON_KEY_PROD --secret $AMAZON_SECRET_PROD
-      ```
+            - ./stout deploy --env production --key $AMAZON_KEY_PROD --secret $AMAZON_SECRET_PROD</code></pre>
 
-      If you use environment vars for your credentials, make sure to add them to your Circle config.
+      <p>If you use environment vars for your credentials, make sure to add them to your Circle config.</p>
 
-      If your repo is private, you can specify your Amazon key and secret in your deploy.yaml file, removing the need to specify them in the commands.
+      <p>If your repo is private, you can specify your Amazon key and secret in your deploy.yaml file, removing the need to specify them in the commands.</p>
 
-      ### Caching
+      <h3>Caching</h3>
 
-      All versioned files (include a hash of their contents in the path) are configured to cache for one year.  All unversioned files are configured to cache for 60 seconds.  This means it will take up to 60 seconds for users to see changes made to your site.
+      <p>All versioned files (include a hash of their contents in the path) are configured to cache for one year. All unversioned files are configured to cache for 60 seconds. This means it will take up to 60 seconds for users to see changes made to your site.</p>
 
-      ### Versioning
+      <h3>Versioning</h3>
 
-      Only JS and CSS files which are pointed to in HTML files are hashed, as we need to be able to update the HTML to point to our new, versioned, files.
+      <p>Only JS and CSS files which are pointed to in HTML files are hashed, as we need to be able to update the HTML to point to our new, versioned, files.</p>
 
-      Any other file included in your `--files` argument will be uploaded, but not versioned, meaning a rollback will not effect these files.  This is something we'd like to improve.
+      <p>Any other file included in your <code>--files</code> argument will be uploaded, but not versioned, meaning a rollback will not effect these files. This is something we&#39;d like to improve.</p>
 
-      ### Consistency
+      <h3>Consistency</h3>
 
-      As the final step of the deploy is atomic, multiple actors can trigger deploys simultaneously without any danger of inconsistent state.  Whichever process triggers the final 'copy' step for a given file will win, with it's specified dependencies guarenteed to be used in their entirity.  Note that this consistency is only guarenteed on a per-html-file level, you may end up with some html files from one deployer, and others from another, but all files will point to their correct dependencies.
+      <p>As the final step of the deploy is atomic, multiple actors can trigger deploys simultaneously without any danger of inconsistent state. Whichever process triggers the final &#39;copy&#39; step for a given file will win, with it&#39;s specified dependencies guarenteed to be used in their entirity. Note that this consistency is only guarenteed on a per-html-file level, you may end up with some html files from one deployer, and others from another, but all files will point to their correct dependencies.</p>
 
-      ### Deploying Multiple Projects To One Site
+      <h3>Deploying Multiple Projects To One Site</h3>
 
-      You can deploy multiple projects to the same domain simply by specifying the appropriate `dest` for each one.  For example your homepage might have the dest `./`, and your blog `./blog`.  Your homepage will be hosted at `your-site.com`, your blog `your-site.com/blog`.
+      <p>You can deploy multiple projects to the same domain simply by specifying the appropriate <code>dest</code> for each one. For example your homepage might have the dest <code>./</code>, and your blog <code>./blog</code>. Your homepage will be hosted at <code>your-site.com</code>, your blog <code>your-site.com/blog</code>.</p>
 
-      ### Using Client-side Routers
+      <h3>Using Client-side Routers</h3>
 
-      It is possible to use a client-side router (where you have multiple request URLs point to the same HTML file) by configuring your CloudFront distribution to serve your index.html file in response to 403s and 404s.
+      <p>It is possible to use a client-side router (where you have multiple request URLs point to the same HTML file) by configuring your CloudFront distribution to serve your index.html file in response to 403s and 404s.</p>
 
-      ![CF](https://raw.githubusercontent.com/EagerIO/Stout/master/docs/images/cf-screenshot.png)
+      <p><img alt="CF" src="https://raw.githubusercontent.com/EagerIO/Stout/master/docs/images/cf-screenshot.png"/></p>
 
-      ### Installing
+      <h3>Installing</h3>
 
-      - Download the release for your system type from our [releases](https://github.com/EagerIO/Stout/releases)
-      - Copy or symlink the `stout` binary contained in the archive into your path (for example, into `/usr/local/bin`)
+      <ul><li>Download the release for your system type from our <a href="https://github.com/EagerIO/Stout/releases">releases</a></li><li>Copy or symlink the <code>stout</code> binary contained in the archive into your path (for example, into <code>/usr/local/bin</code>)</li></ul>
 
-      ### Building
+      <h3>Building</h3>
 
-      - Install go and godep
-      - Run `godep restore ./...`
-      - Run `go build -o ../stout src/*`
+      <ul><li>Install go and godep</li><li>Run <code>godep restore ./...</code></li><li>Run <code>go build -o ../stout src/*</code></li></ul>
 
-      #### For a Release (Cross Compiling)
+      <h4>For a Release (Cross Compiling)</h4>
 
-      - Run `go get github.com/laher/goxc`
-      - Run `go get code.google.com/p/go.tools/cmd/vet`
-      - Run `./utils/xc.sh`
+      <ul><li>Run <code>go get github.com/laher/goxc</code></li><li>Run <code>go get code.google.com/p/go.tools/cmd/vet</code></li><li>Run <code>./utils/xc.sh</code></li></ul>
 
-      The first run will take significantly longer than future runs.  The built files will be placed in the `./builds` directory.
+      <p>The first run will take significantly longer than future runs. The built files will be placed in the <code>./builds</code> directory.</p>
 
-      ### Running
+      <h3>Running</h3>
 
-      To run the commands for development purposes, run: `go run src/*`, followed by any command line args you would normally give to the command.
+      <p>To run the commands for development purposes, run: <code>go run src/*</code>, followed by any command line args you would normally give to the command.</p>
 
-      ### Contributing
+      <h3>Contributing</h3>
 
-      Please do, we would love for this to become a project of the community.  Feel free to open an issue, submit a PR or contribute to the wiki.
+      <p>Please do, we would love for this to become a project of the community. Feel free to open an issue, submit a PR or contribute to the wiki.</p>
