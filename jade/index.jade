@@ -105,11 +105,7 @@ html
 
       <p>Using the info below you can learn about what the deploy/rollback tools actually do, deploying to subfolders, deploying from your build tool, and rolling back.</p>
 
-      <h2>Backstory</h2>
-
-      <p>We wrote Stout because we couldn&#39;t find an open-source way to reliably and efficiently deploy our static sites (including our app and blog). We used a traditional upload-to-s3 tool, but caching meant a user could get the new html and styles, but the old scripts, for example, causing sporatic and random errors. It also didn&#39;t support reliably rolling back when necessary. We built Stout to be the reliable, production-ready choice for static deploys.</p>
-
-      <h2>Function</h2>
+      <h2>Using Stout</h2>
 
       <p>Stout is an executable file built from Go code. The <code>deploy</code> command deploys one or more html files and their dependencies to a specified location in S3. The <code>rollback</code> command takes a deploy id and rolls the project back to that version.</p>
 
