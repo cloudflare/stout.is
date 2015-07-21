@@ -54,6 +54,10 @@ gulp.task 'html', ->
     .pipe(jade().on('error', handleError))
     .pipe(gulp.dest('./build'))
 
+gulp.task 'images', ->
+  gulp.src('./images/**/*')
+    .pipe gulp.dest('./build/images')
+
 gulp.task 'watch', ->
   gulp.watch ['./coffee/**'], ['js']
   gulp.watch ['./styl/**'], ['css']
@@ -72,6 +76,7 @@ gulp.task 'build', [
   'js'
   'css'
   'html'
+  'images'
 ]
 
 gulp.task 'default', [
