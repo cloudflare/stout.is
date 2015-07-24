@@ -20,12 +20,12 @@ html
     meta(name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, minimal-ui")
     meta(http-equiv="X-UA-Compatible" content="IE=edge, chrome=1")
 
-    title Stout static deploy tool by Eager
+    title Stout Static Website Deploy Tool by Eager
 
     meta(name="description" content="Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.")
-    meta(property="og:title" content="Stout static deploy tool by Eager")
+    meta(property="og:title" content="Stout Static Website Deploy Tool by Eager")
     meta(property="og:description" content="Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.")
-    meta(name="twitter:title" content="Stout static deploy tool by Eager")
+    meta(name="twitter:title" content="Stout Static Website Deploy Tool by Eager")
     meta(name="twitter:description" content="Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.")
 
     link(href="images/favicon.ico" rel="icon" type="image/x-icon")
@@ -58,11 +58,18 @@ html
         h2 Stout is a deploy tool for static websites. It takes a website and uploads it to S3 in a more reliable way than other tools.
 
     div.content.
+      <h2>What Stout Is</h2>
+
+      <p>Stout is a way of uploading a static website to <a href="http://aws.amazon.com/s3/">S3</a>.  It is capable of configuring <a href="http://aws.amazon.com/cloudfront/">CloudFront</a>
+      and <a href="http://aws.amazon.com/route53/">Route 53</a> to allow you to reliably serve static websites in a scalable and maintenance-free way.  It can be an alternative to hosts
+      like GoDaddy, to dynamic web servers like Rails, or to manually uploading your site to S3 or an FTP server.</p>
+
       <h2>Why You Need Stout</h2>
 
-      <p>Traditionally uploading your files to S3 introduces a serious caching issue we ran into in practice at <a href="https://eager.io">Eager</a>.
-      The cache for the various files your site depends on can expire at different times, meaning your users get an inconsistent (broken) set of files for a
-      time after every single deploy. Further, traditional static site deployments don&#39;t offer any method of rolling back a previous deploy.</p>
+      <p>Traditionally uploading your files to a file host introduces a serious caching issue we ran into in practice at <a href="https://eager.io">Eager</a>.
+      Your site depends on a variety of Javascript and CSS files.  The cache for these files is not guarenteed to expire at the same time, meaning for a time,
+      some users may end up with new CSS and old Javascript for example, and therefore a broken site.
+      Further, traditional static site deployments don&#39;t offer any method of rolling back a previous deploy.</p>
 
       <p>We built Stout to fix these issues.</p>
 
@@ -78,7 +85,8 @@ html
 
       <p><a href="https://github.com/EagerIO/Stout/releases">Download</a> the <code>stout</code> executable for your system from our latest release into a directory on your <code>$PATH</code>, like <code>/usr/local/bin</code>.</p>
 
-      <p>You can use the <code>create</code> command to create a new site. It automatically creates an S3 bucket, a CloudFront distribution, and a user account for deployment. It therefore requires
+      <p>You can use the <code>create</code> command to create a new site. It automatically creates an S3 bucket, a CloudFront distribution, and a restricted user account for deployment.
+      If you have a Route 53 zone for the necessary domain, it will also configure a route to this new CloudFront distribution.  It therefore requires
       credentials for an Amazon AWS account which has permissions to those services along with Route 53.</p>
 
       <pre><code>stout create --bucket my.website.com --key MY_AWS_KEY --secret MY_AWS_SECRET</code></pre>
@@ -190,19 +198,19 @@ html
 
       <p>To deploy to development we run (from the directory with the deploy.yaml file in it):</p>
 
-      <pre><code>bash
+      <pre><code>
       deploy --env development</code></pre>
 
       <p>A rollback of development would be:</p>
 
-      <pre><code>bash
+      <pre><code>
       rollback --env development $DEPLOY_ID</code></pre>
 
       <p>Where the deploy id is taken from the output of the deploy you wish to rollback to.</p>
 
       <p>Our public projects use a similar config, but they specify the Amazon credentials as environment vars from the build system, passed in as flags:</p>
 
-      <pre><code>bash
+      <pre><code>
       deploy --env development --key $AMAZON_KEY_DEV --secret $AMAZON_SECRET_DEV</code></pre>
 
       <p>Never commit Amazon credentials to a file in a public repo. Keep them on your local machine, or in your build system&#39;s configuration.</p>
@@ -220,32 +228,6 @@ html
       </code></pre>
 
       <p>That way, assuming S3 and CloudFront are configured properly, you&#39;ll be able to use the clean URLs <code>/</code> and <code>/blog/</code>.</p>
-
-      <h3>Permissions</h3>
-
-      <p>The AWS user which is used for Stout should have the <code>GetObject</code>, <code>PutObject</code>, <code>DeleteObject</code>, and <code>ListBucket</code> permissions. The <code>utils/create_site.sh</code> script will set this up for you if you use it to create your site.</p>
-
-      <p>This is an example policy config which works:</p>
-
-      <pre><code>{
-        &quot;Version&quot;: &quot;2012-10-17&quot;,
-        &quot;Statement&quot;: [
-          {
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Action&quot;: [
-              &quot;s3:DeleteObject&quot;,
-              &quot;s3:ListBucket&quot;,
-              &quot;s3:PutObject&quot;,
-              &quot;s3:GetObject&quot;
-            ],
-            &quot;Resource&quot;: [
-              &quot;arn:aws:s3:::BUCKET&quot;, &quot;arn:aws:s3:::BUCKET/*&quot;
-            ]
-          }
-        ]
-      }</code></pre>
-
-      <p>Be sure to replace <code>BUCKET</code> with your bucket&#39;s actual name.</p>
 
       <h3>Deploying with CircleCI</h3>
 
@@ -295,6 +277,8 @@ html
       <p>It is possible to use a client-side router (where you have multiple request URLs point to the same HTML file) by configuring your CloudFront distribution to serve your index.html file in response to 403s and 404s.</p>
 
       <p><img alt="CF" src="https://raw.githubusercontent.com/EagerIO/Stout/master/docs/images/cf-screenshot.png"/></p>
+
+      <p>This is automatically configured by the <code>create</code> command.</p>
 
       <h3>Installing</h3>
 
