@@ -71,7 +71,7 @@ html
       <h2>Why You Need Stout</h2>
 
       <p>Traditionally uploading your files to a file host introduces a serious caching issue we ran into in practice at <a href="https://eager.io">Eager</a>.
-      Your site depends on a variety of Javascript and CSS files.  The cache for these files is not guarenteed to expire at the same time, meaning for a time,
+      Your site depends on a variety of Javascript and CSS files.  The cache for these files is not guaranteed to expire at the same time, meaning for a time,
       some users may end up with new CSS and old Javascript for example, and therefore a broken site.  Most static deploy tools get around this by disabling all
       client-side caching, which provides a far from ideal experience for end-users.
       Further, traditional static site deployments don&#39;t offer any method of rolling back to a previous deploy.</p>
@@ -84,7 +84,7 @@ html
 
       <h3>Limitations</h3>
 
-      <ul><li>Stout doesn&#39;t currently support rolling back files that aren&#39;t HTML, JS or CSS (images, videos, etc.). See the Versioning section for more information.</li><li>All-or-nothing consistency is only guarenteed on a per-html-file basis, not for the entire deploy. See the Consistency section for more information.</li></ul>
+      <ul><li>Stout doesn&#39;t currently support rolling back files that aren&#39;t HTML, JS or CSS (images, videos, etc.). See the Versioning section for more information.</li><li>All-or-nothing consistency is only guaranteed on a per-html-file basis, not for the entire deploy. See the Consistency section for more information.</li></ul>
 
       <h2>Getting Started</h2>
 
@@ -271,7 +271,7 @@ html
 
       <h3>Consistency</h3>
 
-      <p>As the final step of the deploy is atomic, multiple actors can trigger deploys simultaneously without any danger of inconsistent state. Whichever process triggers the final &#39;copy&#39; step for a given file will win, with it&#39;s specified dependencies guarenteed to be used in their entirity. Note that this consistency is only guarenteed on a per-html-file level, you may end up with some html files from one deployer, and others from another, but all files will point to their correct dependencies.</p>
+      <p>As the final step of the deploy is atomic, multiple actors can trigger deploys simultaneously without any danger of inconsistent state. Whichever process triggers the final &#39;copy&#39; step for a given file will win, with it&#39;s specified dependencies guaranteed to be used in their entirity. Note that this consistency is only guaranteed on a per-html-file level, you may end up with some html files from one deployer, and others from another, but all files will point to their correct dependencies.</p>
 
       <h3>Deploying Multiple Projects To One Site</h3>
 
