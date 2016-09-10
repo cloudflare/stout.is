@@ -203,20 +203,17 @@ html
 
       <p>To deploy to development we run (from the directory with the deploy.yaml file in it):</p>
 
-      <pre><code>
-      deploy --env development</code></pre>
+      <pre><code>deploy --env development</code></pre>
 
       <p>A rollback of development would be:</p>
 
-      <pre><code>
-      rollback --env development $DEPLOY_ID</code></pre>
+      <pre><code>rollback --env development $DEPLOY_ID</code></pre>
 
       <p>Where the deploy id is taken from the output of the deploy you wish to rollback to.</p>
 
       <p>Our public projects use a similar config, but they specify the Amazon credentials as environment vars from the build system, passed in as flags:</p>
 
-      <pre><code>
-      deploy --env development --key $AMAZON_KEY_DEV --secret $AMAZON_SECRET_DEV</code></pre>
+      <pre><code>deploy --env development --key $AMAZON_KEY_DEV --secret $AMAZON_SECRET_DEV</code></pre>
 
       <p>Never commit Amazon credentials to a file in a public repo. Keep them on your local machine, or in your build system&#39;s configuration.</p>
 
@@ -226,8 +223,7 @@ html
 
       <p>For example, if you want a root and a page at <code>/blog</code>, you would have:</p>
 
-      <p><code>
-      index.html
+      <pre><code>index.html
       blog/
         index.html
       </code></pre>
