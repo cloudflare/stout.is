@@ -1,4 +1,3 @@
-bower      = require 'gulp-bower'
 browserify = require 'browserify'
 buffer     = require 'gulp-buffer'
 coffee     = require 'gulp-coffee'
@@ -27,10 +26,7 @@ handleError = (err) ->
 STYLUS_OPTS =
   use: [nib()]
   errors: true
-  paths: [
-    __dirname
-    Path.join(__dirname, 'bower_components')
-  ]
+  paths: [__dirname]
 
 gulp.task 'js', ->
   browserify({

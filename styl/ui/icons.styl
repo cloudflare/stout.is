@@ -1,0 +1,156 @@
+@import nib
+
+@css {
+  @font-face {
+    font-family: "cloudflare-icons";
+    font-style: normal;
+    font-weight: normal;
+    src: url(data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAQQAAoAAAAABewAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAARQAAAEw7LPuDUZGVE0AAAIIAAAAGgAAABx04jsnT1MvMgAAAiQAAABLAAAAYGFpBYRjbWFwAAACcAAAAEcAAAFOP7UHcGhlYWQAAAK4AAAALwAAADYGoUQqaGhlYQAAAugAAAAfAAAAJAe/AetobXR4AAADCAAAABAAAAAQCwoAAG1heHAAAAMYAAAABgAAAAYABFAAbmFtZQAAAyAAAADaAAABsE3GDFBwb3N0AAAD/AAAABMAAAAg/50AZnicTY69S8NQFMXvbV5aLI/4GXEIzSJYAh0dXPwXLNpgVymvH6AtpMHJsWglk06CuPXvEPyg9E9wt2SVt/huk2exWUo5HPgdONx7EBgDROTioiWCSqfR6/YBc4BwTKUcuQbtsTo3JGelIrBh2Y2iJfBCFM5GydB04GXdAdhwYLTpwJqDB1tgZjfysA0ueHAYdq5EP+i02mGl0RbXQa97KZpLXvm9OgMA73CI98AQ90+aN+onkgmXKCVpacjd2ST5+pvk5TywE056zgsW+XRrq281rX2m0zROYxXXTtU0zRS/n6lFVhl9mBY90sDW5/RUrZOnhV547JvWLw0Y+fp5/KbLJMgjUX1dlB92Zkd2xIv/gw+CN3icY2BgYGQAggsF9tdA9CWLvytgNABOBQe1AAB4nGNgZopgnMDAysDBasw6k4GBUQ5CM19nSGMSYgACVgYIaGBgYGJAAgFprikMDgzXFazY0v6lMexg/sIgDhRmhCtQAEJGABgTC0oAeJxjYGBgZoBgGQZGBhDwAPIYwXwWBh0gzQakGRmYGK4rWP3/D+RfV7D8//+/FpAFUsUC1s0E5LAxQA0YnoCZibAaAF3eCGYAeJxjYGRgYADisx3H/eL5bb4ycHMwgMAli78rEPT/l8wCzF+AXA4GJpAoAFzJDHkAeJxjYGRgYP7y/yXDDmYBBoZ/b4EkUAQFsAAAloYFrwAEAAAAAf0AAAH9AAADEAAAAABQAAAEAAB4nI2PvQ3CMBCFXyCJxI8oEaULJCpHTiRSMEBKSvoIWVGaWHKYgREYgzEYgDEYgJoXc0UKCizZ/u7euzsbwBI3RBhWhAU2whMkMMJT7HAVjul5CCfkl3CKRbSiM4pnzKxD1cATzLEVnuKIUjim5y6ckJ/CKfkNixoNTw+NFmc4dOgBWzfW6/bsOgajvGSqEF/C7UO9QoGM/1A4cP/u+tVK5nI6NSsMac92rrtUzjdWFZlRBzWazqjUudGFyWn857WnoPfUB1VxwvAunKzvW9epPDN/9fkAFF9DNgAAeJxjYGYAg/+zGNIYsAAALpkCAwA=) format("woff");
+  }
+}
+
+/*
+Eager Icons Font
+- Contains times and chevrons, × ‹ ›
+- Edited at http://www.glyphrstudio.com/online/
+- Converted with https://onlinefontconverter.com/ and http://www.giftofspeed.com/base64-encoder/
+- Original SVG:
+
+  <?xml version="1.0" standalone="no"?>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <defs>
+      <font id="cloudflare-icons" horiz-adv-x="509">
+        <font-face font-family="cloudflare-icons"
+          font-weight="400"
+          font-stretch="normal"
+          units-per-em="2048"
+          panose-1="0 0 5 0 0 0 0 0 0 0"
+          ascent="1638"
+          descent="-410"
+          bbox="0 -518 2204 1694"
+          underline-thickness="102"
+          underline-position="-51"
+          unicode-range="U+00D7-2039"
+        />
+        <glyph glyph-name="times" unicode="&#x00D7;" horiz-adv-x="509" d="M449 498l335 -338l-55 -56l-336 338l-338 -338l-55 56l336 338l-336 336l55 57l338 -338l336 338l55 -57z" />
+        <glyph glyph-name="right-chevron" unicode="&#x203a;" horiz-adv-x="509" d="M510 496l-451 -519l-59 54l406 465l-406 465l59 51z" />
+        <glyph glyph-name="left-chevron" unicode="&#x2039;" horiz-adv-x="784" d="M0 496l451 516l59 -51l-406 -465l404 -465l-59 -54z" />
+      </font>
+    </defs>
+  </svg>
+*/
+
+.icon
+  font-size 16px
+  display inline-block
+  color inherit
+
+  &.menu-icon
+    box-shadow inset 0 .1875em, 0 -.1875em, 0 .1875em
+    height .5625em
+    width 1.25em
+    border-top .1875em solid transparent
+
+  &.grid-icon
+    clearfix()
+    height 1.125em
+    width 1.125em
+    overflow hidden
+
+    b
+      color inherit
+      float left
+      height .25em
+      width .25em
+      margin 0 .125em .125em 0
+      background currentColor
+
+  &.question-icon
+    position relative
+    height 1.25em
+    width 1.25em
+    border-radius 50%
+    box-shadow inset 0 0 0 999em
+    overflow hidden
+
+    &:before
+      content "?"
+      display block
+      position absolute
+      top 0
+      right 0
+      bottom 0
+      left 0
+      text-align center
+      font-size .9em
+      line-height 1.4
+      color #fff
+      text-indent .1em
+
+  &.add-icon
+    box-shadow inset 0 0 0 .5em, 0 -.25em, 0 -.5em, .25em 0, .5em 0, 0 .25em, 0 .5em, -.25em 0, -.5em 0
+    height .25em
+    width .25em
+    margin .5em
+
+  &.edit-icon
+    box-shadow inset 0 0 0 .125em, .5em 0 0 -.375em, -.5em 0 0 -.375em, 0 -.5em 0 -.375em, 0 .5em 0 -.375em, -.33em -.33em 0 -.375em, .33em -.33em 0 -.375em, -.33em .33em 0 -.375em, .33em .33em 0 -.375em
+    border-radius 50%
+    height 1em
+    width 1em
+    margin .125em
+
+  &.left-arrow-icon, &.right-arrow-icon, &.down-arrow-icon, &.up-arrow-icon
+    height 0
+    width 0
+    border .5625em solid
+
+  &.left-arrow-icon
+    border-left-color transparent
+    border-top-color transparent
+    border-bottom-color transparent
+
+  &.right-arrow-icon
+    border-right-color transparent
+    border-top-color transparent
+    border-bottom-color transparent
+
+  &.down-arrow-icon
+    border-left-color transparent
+    border-right-color transparent
+    border-bottom-color transparent
+
+  &.up-arrow-icon
+    border-left-color transparent
+    border-right-color transparent
+    border-top-color transparent
+
+  &.ellipsis-icon
+    height .125em
+    width .125em
+    margin .325em .625em
+    border-radius 50%
+    box-shadow -.5em 0 0 .0625em, .5em 0 0 .0625em, inset 0 0 0 1em, 0 0 0 .0625em
+
+  &.spinner-icon
+    height 1em
+    width 1em
+    border .0625em solid
+    border-radius 50%
+    border-bottom-color transparent
+    border-left-color transparent
+    transform rotateZ(0deg)
+    animation spinner-icon-spin infinite 420ms linear
+
+  &.x-icon:before
+    display inline-block
+    content "\00D7"
+    font-size 2em
+    color inherit
+    line-height .6em
+    width .5em
+    height .5em
+
+@keyframes spinner-icon-spin
+  to
+    transform rotateZ(360deg)

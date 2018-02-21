@@ -1,0 +1,35 @@
+@import nib
+
+@import sizes
+@import fonts
+@import media-query-variables
+
+logoWidth = 108px
+logoHeight = 40px
+
+logoCloudOnlyWidth = 80px
+logoCloudOnlyHeight = 40px
+
+.logo, .logo-link
+
+  svg
+    display block
+    width 100%
+    height 100%
+
+.logo-link
+  display inline-block
+  width logoWidth
+  height logoHeight
+
+  &.logo-cloud-only-link
+    width logoCloudOnlyWidth
+    height logoCloudOnlyHeight
+
+  .logo, logo
+    display block
+    height 100%
+    width 100%
+
+  &, &:hover
+    text-decoration none

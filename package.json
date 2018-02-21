@@ -1,5 +1,5 @@
 {
-  "name": "json-is",
+  "name": "stout-is",
   "version": "0.0.1",
   "engines": {
     "node": ">=0.10.28"
@@ -27,7 +27,6 @@
     "gulp-util": "^3.0.0",
     "nib": "^1.0.3",
     "lodash": "^2.4.1",
-    "gulp-bower": "0.0.7",
     "gulp-buffer": "0.0.2",
     "gulp-replace": "^0.5.0",
     "vinyl-source-stream": "^1.0.0",

@@ -1,0 +1,28 @@
+chevronIconForMoreLinksAndButtons()
+  font-family "cloudflare-icons"
+  position relative
+  display inline-block
+  vertical-align baseline
+  color inherit
+  font-style normal
+  font-weight inherit
+  font-size 1em
+  line-height 1
+  height .9em
+  text-decoration none
+
+a.more, button.more, .with-more-icon-after
+
+  &::after
+    chevronIconForMoreLinksAndButtons()
+    content "\203A" // ›
+    padding-left .3em
+    flex 0 0
+
+a.before, .with-before-icon-before
+
+  &::before
+    chevronIconForMoreLinksAndButtons()
+    content "\2039" // ‹
+    padding-right .3em
+    flex 0 0
